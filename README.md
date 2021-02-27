@@ -62,4 +62,4 @@ LastName * FirstName * Email * FavoriteColor * DateOfBirth
 ## Input Values
 
 All fields will be treated as Strings and there will be no validation, e.g. _emails will be taken as is_. The exception is
-`DateOfBirth` this needs to be parsed to make it sortable, the input format is the same as the output `MM/DD/YYYY`
+`DateOfBirth` this needs to be parsed to make it sortable, the input format is the same as the output `M/D/YYYY`
