@@ -8,11 +8,11 @@
   (:import (java.time LocalDate)))
 
 (deftest records-get-test
-  (let [app          (create-app-handler)
-        result-count (count @records)
+  (let [app              (create-app-handler)
+        result-count     (count @records)
         mock-get-request #(-> (mock/request :get (str "/records/" %))
                               (mock/header "Content-Type" "application/json"))]
-    (testing "Ensure /records/email returns the correct number of results."
+    (testing "Ensure GET /records/email returns the correct number of results."
       (let [response (-> (mock-get-request "email")
                          app
                          :body
@@ -21,7 +21,7 @@
                (:size response)))
         (is (= result-count
                (count (:results response))))))
-    (testing "Ensure /records/birthdate returns the correct number of results."
+    (testing "Ensure GET /records/birthdate returns the correct number of results."
       (let [response (-> (mock-get-request "birthdate")
                          app
                          :body
@@ -30,7 +30,7 @@
                (:size response)))
         (is (= result-count
                (count (:results response))))))
-    (testing "Ensure /records/name returns the correct number of results."
+    (testing "Ensure GET /records/name returns the correct number of results."
       (let [response (-> (mock-get-request "name")
                          app
                          :body
@@ -39,6 +39,18 @@
                (:size response)))
         (is (= result-count
                (count (:results response))))))))
+
+(deftest records-post-test
+  (let [app               (create-app-handler)
+        mock-body         "Zenia,Molineux,zmolineux39@vkontakte.ru,Red,4/19/2020"
+        mock-post-request (-> (mock/request :post "/records")
+                              (mock/body mock-body))
+        result-count      (count @records)]
+    (testing "Ensure POST /records increases the number of records by one"
+      ;; Side-effect request
+      (app mock-post-request)
+      (is (= (inc result-count)
+             (count @records))))))
 
 (defn database
   "Populates a database for use during testing, clears it when done."
