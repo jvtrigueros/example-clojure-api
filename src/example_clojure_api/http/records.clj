@@ -36,5 +36,10 @@
 
 (defn create-record!
   "Create a new record and add to database."
-  [arglist])
-
+  [request-body]
+  (if-let [record (some-> request-body slurp parse/parse-line)]
+    (do
+      ;; Side-effect, load data into "database"
+      (swap! records conj record)
+      (response/response "OK"))
+    (response/bad-request "Couldn't insert record!")))

@@ -10,7 +10,7 @@
     (GET "/email" [] (records/by-email))
     (GET "/birthdate" [] (records/by-birthdate))
     (GET "/name" [] (records/by-lastname))
-    (POST "/" [] "data")))
+    (POST "/" {body :body} (records/create-record! body))))
 
 (defn debug-middleware
   "Dummy middleware for quick inspecting of values in the middleware chain."
