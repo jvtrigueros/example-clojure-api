@@ -10,4 +10,7 @@
   :main ^:skip-aot example-clojure-api.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot      :all
-                       :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}})
+                       :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}
+             :dev     {:aliases      {"cljstyle" ["run" "-m" "cljstyle.main"]}
+                       :dependencies [[cheshire "5.10.0"]
+                                      [mvxcvi/cljstyle "0.14.0"]]}})
