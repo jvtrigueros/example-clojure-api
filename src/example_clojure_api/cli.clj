@@ -14,7 +14,7 @@
     (->> sorted-data
          (mapv (fn [{:keys [last-name first-name email favorite-color dob]}]
                  ;; ensures order
-                 [last-name first-name email favorite-color (.format dob parse/date-formatter)]))
+                 [last-name first-name email favorite-color (parse/date->str dob)]))
          (cons ["Last Name" "First Name" "Email" "Favorite Color" "Date of Birth"])
          (csv/write-csv writer))))
 

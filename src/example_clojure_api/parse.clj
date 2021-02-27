@@ -9,12 +9,21 @@
 
 (def date-formatter (DateTimeFormatter/ofPattern "M/d/yyyy"))
 
+(defn date->str
+  "Formats a LocalDate, nil otherwise."
+  [d]
+  (try
+    (.format d date-formatter)
+    (catch Exception e_
+      ;; Ignore Exception, but return nil instead of bubbling up
+      (println "Failed to format" d "as a String!"))))
+
 (defn ^LocalDate str->date
   [s]
   (try
     (LocalDate/parse s date-formatter)
     (catch Exception e_
-      ;; Ignore Exception, but return nil instead of bubbling up the Exception
+      ;; Ignore Exception, but return nil instead of bubbling up
       (println "Failed to parse" s "as LocalDate!"))))
 
 (defn parse-line
