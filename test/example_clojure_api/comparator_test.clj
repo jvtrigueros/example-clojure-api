@@ -27,8 +27,3 @@
                (dissoc (first sorted-data) :dob)))
         (is (= {:last-name "a", :email "z@b.com"}
                (dissoc (last sorted-data) :dob)))))))
-
-
-
-
-
