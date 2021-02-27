@@ -16,7 +16,8 @@
   [& args]
   (let [handler (routes/create-app-handler)
         port    (Integer/parseInt (or (System/getenv "PORT")
-                                      "8080"))]
+                                      "3000"))]
+    (println "HTTP Server running on port:" port)
     (run-server
       handler
       {:port port})))
