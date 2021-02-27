@@ -18,7 +18,7 @@ of files.
 
 ## Input Format
 
-Each file will be of only **one** type, that is the following isn't a valid format:
+Files can **only** be delimited by pipe(|), comma(,), or space( ). Mixing and matching is allowed the following are valid:
 
 ```
 LastName | FirstName | Email | FavoriteColor | DateOfBirth
@@ -27,8 +27,6 @@ LastName FirstName Email FavoriteColor DateOfBirth
 LastName | FirstName, Email FavoriteColor | DateOfBirth
 ```
 
-But these are:
-
 ```
 LastName | FirstName | Email | FavoriteColor | DateOfBirth
 LastName | FirstName | Email | FavoriteColor | DateOfBirth
@@ -47,8 +45,19 @@ LastName FirstName Email FavoriteColor DateOfBirth
 LastName FirstName Email FavoriteColor DateOfBirth
 ```
 
-The application will determine the delimiter and use it to parse the given file, but if invalid input is provided, the
-application will behave in a "garbage in garbage out" manner.
+```
+LastName, FirstName | Email              FavoriteColor DateOfBirth
+LastName            , FirstName      |        Email , FavoriteColor,DateOfBirth
+LastName FirstName Email FavoriteColor DateOfBirth
+```
+
+The application expects there to be a value for each row, if one is missing the row will be discarded.
+
+This is an example of an invalid row:
+```
+LastName * FirstName * Email * FavoriteColor * DateOfBirth
+```
+
 
 ## Input Values
 
