@@ -1,7 +1,7 @@
 (ns example-clojure-api.http.records
   (:require
     [example-clojure-api.parse :as parse]
-    [example-clojure-api.comparator :refer [by-email-desc-lastname-asc]]
+    [example-clojure-api.comparator :refer [by-email-desc-lastname-asc by-dob-asc by-lastname-desc]]
     [ring.util.response :as response]))
 
 (defonce records (atom []))
@@ -22,17 +22,19 @@
   []
   (by-fn by-email-desc-lastname-asc))
 
-(defn get-sorted-by-birthdate
+(defn by-birthdate
   "Get a list of records sorted by birthdate."
-  [arglist]
-  )
+  []
+  (by-fn by-dob-asc))
 
-(defn get-sorted-by-name
+
+(defn by-lastname
   "Get a list of records sorted by last name."
-  [arglist]
-  )
+  []
+  (by-fn by-lastname-desc))
+
 
 (defn create-record!
   "Create a new record and add to database."
-  [arglist]
-  )
+  [arglist])
+

@@ -8,8 +8,8 @@
 (defroutes routes
   (context "/records" []
     (GET "/email" [] (records/by-email))
-    (GET "/birthdate" [] "birthdate")
-    (GET "/name" [] "name")
+    (GET "/birthdate" [] (records/by-birthdate))
+    (GET "/name" [] (records/by-lastname))
     (POST "/" [] "data")))
 
 (defn debug-middleware
