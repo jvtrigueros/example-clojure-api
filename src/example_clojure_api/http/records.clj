@@ -1,10 +1,12 @@
 (ns example-clojure-api.http.records
   (:require
-    [example-clojure-api.parse :as parse]
     [example-clojure-api.comparator :refer [by-email-desc-lastname-asc by-dob-asc by-lastname-desc]]
+    [example-clojure-api.parse :as parse]
     [ring.util.response :as response]))
 
+
 (defonce records (atom []))
+
 
 (defn by-fn
   "Get sorted records, sorted by fn, where fn is a comparator."
@@ -17,10 +19,12 @@
       {:size    (count results)
        :results results})))
 
+
 (defn by-email
   "Get a list of records sorted by email."
   []
   (by-fn by-email-desc-lastname-asc))
+
 
 (defn by-birthdate
   "Get a list of records sorted by birthdate."

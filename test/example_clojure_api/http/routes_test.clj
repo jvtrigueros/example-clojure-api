@@ -1,11 +1,14 @@
 (ns example-clojure-api.http.routes-test
   (:require
+    [cheshire.core :as json]
     [clojure.test :refer :all]
-    [ring.mock.request :as mock]
-    [example-clojure-api.http.routes :refer [create-app-handler]]
     [example-clojure-api.http.records :refer [records]]
-    [cheshire.core :as json])
-  (:import (java.time LocalDate)))
+    [example-clojure-api.http.routes :refer [create-app-handler]]
+    [ring.mock.request :as mock])
+  (:import
+    (java.time
+      LocalDate)))
+
 
 (deftest records-get-test
   (let [app              (create-app-handler)
@@ -40,6 +43,7 @@
         (is (= result-count
                (count (:results response))))))))
 
+
 (deftest records-post-test
   (let [app               (create-app-handler)
         mock-body         "Zenia,Molineux,zmolineux39@vkontakte.ru,Red,4/19/2020"
@@ -52,6 +56,7 @@
       (is (= (inc result-count)
              (count @records))))))
 
+
 (defn database
   "Populates a database for use during testing, clears it when done."
   [f]
@@ -61,6 +66,7 @@
                    {:last-name "a" :email "z@b.com" :dob (.minusDays (LocalDate/now) 3)}])
   (f)
   (reset! records []))
+
 
 (use-fixtures :each database)
 

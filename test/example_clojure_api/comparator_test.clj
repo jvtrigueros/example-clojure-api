@@ -2,7 +2,10 @@
   (:require
     [clojure.test :refer :all]
     [example-clojure-api.comparator :as sut])
-  (:import (java.time LocalDate)))
+  (:import
+    (java.time
+      LocalDate)))
+
 
 (deftest comparator-test
   (let [unsorted-data [{:last-name "z" :email "a@b.com" :dob (.minusDays (LocalDate/now) 0)}
