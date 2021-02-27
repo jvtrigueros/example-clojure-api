@@ -4,7 +4,9 @@
                  [http-kit "2.5.3"]
                  [org.clojure/clojure "1.10.2"]
                  [org.clojure/data.csv "1.0.0"]
-                 [ring "1.9.1"]]
+                 [ring "1.9.1"]
+                 [ring/ring-defaults "0.3.2"]
+                 [ring/ring-json "0.5.0"]]
   :main ^:skip-aot example-clojure-api.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot      :all
