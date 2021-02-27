@@ -1,7 +1,19 @@
 # example-clojure-api
 > This is an example of a Clojure application that follows a spec to provide a CLI and HTTP interface.
 
-# Assumptions
+## Usage
+
+The CLI application can be use from `leiningen` or `babashka`
+```
+lein run -m example-clojure-api.cli resources/test-data.csv resources/test-data.psv resources/test-data.tsv
+```
+```
+bb --classpath src -m example-clojure-api.cli resources/test-data.csv resources/test-data.psv resources/test-data.tsv
+```
+
+This will generate three files sorted as specified
+
+# CLI App Assumptions
 
 We will make the following assumptions based on the spec provided.
 
@@ -51,11 +63,14 @@ LastName            , FirstName      |        Email , FavoriteColor,DateOfBirth
 LastName FirstName Email FavoriteColor DateOfBirth
 ```
 
-The application expects there to be a value for each row, if one is missing the row will be discarded.
+The application expects there to be a value for each column, if one is missing the row will be discarded. Because we allow
+mixing and matching, no values can contain a pipe(|), comma(,), or space( ).
 
-This is an example of an invalid row:
+These are example of an invalid rows:
 ```
 LastName * FirstName * Email * FavoriteColor * DateOfBirth
+LastName | First Name | Email | FavoriteColor | DateOfBirth
+LastName, Email, FavoriteColor, DateOfBirth
 ```
 
 
@@ -63,3 +78,7 @@ LastName * FirstName * Email * FavoriteColor * DateOfBirth
 
 All fields will be treated as Strings and there will be no validation, e.g. _emails will be taken as is_. The exception is
 `DateOfBirth` this needs to be parsed to make it sortable, the input format is the same as the output `M/D/YYYY`
+
+## Output
+
+Will be generated as CSV.
